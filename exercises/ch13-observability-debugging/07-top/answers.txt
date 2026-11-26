@@ -1,0 +1,4 @@
+# The name of the Deployment whose pod uses the most CPU
+hog:
+# Roughly how many millicores does it use? (it's capped by its limit: read it in `kubectl top`)
+millicores:

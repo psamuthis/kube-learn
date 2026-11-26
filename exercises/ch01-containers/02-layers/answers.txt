@@ -1,0 +1,10 @@
+# How many filesystem layers does kubeapp:1.0 have? (RootFS.Layers)
+layers:
+# Which user does it run as? (as written in the image config)
+user:
+# The value of the APP_VERSION environment variable baked into the image
+app_version:
+# The image's Entrypoint, joined by single spaces (e.g. `python /x.py`)
+entrypoint:
+# The digest (sha256:…) of the image's *config*, i.e. its image ID
+image_id:

@@ -1,0 +1,12 @@
+# Names of the pods with label tier=backend, sorted alphabetically, separated by single spaces
+backend_pods:
+# The name of the oldest pod (earliest creationTimestamp)
+oldest_pod:
+# The image of the container named `sidecar` in pod `api`
+api_sidecar_image:
+# The name of the pod whose phase is not Running
+not_running:
+# The value of the annotation `kube-learn.dev/owner` on pod `cache`
+cache_owner:
+# How many containers in total across all pods in the namespace?
+total_containers:

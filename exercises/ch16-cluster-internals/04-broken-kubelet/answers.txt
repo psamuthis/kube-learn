@@ -1,0 +1,4 @@
+# The full path of the file you had to fix
+broken_file:
+# The name of the setting that was wrong
+broken_setting:

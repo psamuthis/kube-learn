@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: blue}
+  template:
+    metadata:
+      labels: {app: blue}
+    spec:
+      containers:
+        - name: app
+          image: kubeapp:1.0
+          env: [{name: MESSAGE, value: "this is blue"}]
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe: {httpGet: {path: /ready, port: http}, periodSeconds: 2}
+          resources: {requests: {cpu: 10m, memory: 32Mi}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue
+spec:
+  selector: {app: blue}
+  ports: [{name: http, port: 80, targetPort: http}]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: green}
+  template:
+    metadata:
+      labels: {app: green}
+    spec:
+      containers:
+        - name: app
+          image: kubeapp:2.0
+          env: [{name: MESSAGE, value: "this is green"}]
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe: {httpGet: {path: /ready, port: http}, periodSeconds: 2}
+          resources: {requests: {cpu: 10m, memory: 32Mi}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: green
+spec:
+  selector: {app: green}
+  ports: [{name: http, port: 80, targetPort: http}]

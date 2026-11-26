@@ -1,0 +1,26 @@
+#>>
+#| # Names of the pods with label tier=backend, sorted alphabetically, separated by single spaces
+#| backend_pods:
+#| # The name of the oldest pod (earliest creationTimestamp)
+#| oldest_pod:
+#| # The image of the container named `sidecar` in pod `api`
+#| api_sidecar_image:
+#| # The name of the pod whose phase is not Running
+#| not_running:
+#| # The value of the annotation `kube-learn.dev/owner` on pod `cache`
+#| cache_owner:
+#| # How many containers in total across all pods in the namespace?
+#| total_containers:
+# Names of the pods with label tier=backend, sorted alphabetically, separated by single spaces
+backend_pods: $ kubectl -n $NS get pods -l tier=backend -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | sort | xargs
+# The name of the oldest pod (earliest creationTimestamp)
+oldest_pod: $ kubectl -n $NS get pods -l kube-learn.dev/quiz --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[0].metadata.name}'
+# The image of the container named `sidecar` in pod `api`
+api_sidecar_image: $ kubectl -n $NS get pod api -o jsonpath='{.spec.containers[?(@.name=="sidecar")].image}'
+# The name of the pod whose phase is not Running
+not_running: $ kubectl -n $NS get pods -l kube-learn.dev/quiz --field-selector=status.phase!=Running -o jsonpath='{.items[*].metadata.name}'
+# The value of the annotation `kube-learn.dev/owner` on pod `cache`
+cache_owner: $ kubectl -n $NS get pod cache -o jsonpath='{.metadata.annotations.kube-learn\.dev/owner}'
+# How many containers in total across all pods in the namespace?
+total_containers: $ kubectl -n $NS get pods -l kube-learn.dev/quiz -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.name}{"\n"}{end}{end}' | wc -l
+#<<

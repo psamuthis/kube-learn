@@ -1,0 +1,14 @@
+#>>
+#| # The STATUS of the new (broken) pod, as `kubectl get pods` shows it
+#| broken_pod_status:
+#| # The `reason` of the Deployment's Progressing condition once the deadline has passed
+#| progressing_reason:
+#| # How many pods with kubeapp:1.0 kept running during the broken rollout?
+#| old_pods_running:
+# The STATUS of the new (broken) pod, as `kubectl get pods` shows it
+broken_pod_status: ImagePullBackOff
+# The `reason` of the Deployment's Progressing condition once the deadline has passed
+progressing_reason: ProgressDeadlineExceeded
+# How many pods with kubeapp:1.0 kept running during the broken rollout?
+old_pods_running: 3
+#<<

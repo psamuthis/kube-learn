@@ -1,0 +1,27 @@
+#>>
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: colors
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: blue.ex81.kube-learn.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: blue
+                port: {name: http}
+    - host: green.ex81.kube-learn.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: green
+                port: {name: http}
+#<<

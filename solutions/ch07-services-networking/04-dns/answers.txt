@@ -1,0 +1,26 @@
+#>>
+#| # The first search domain in a pod's /etc/resolv.conf in this namespace
+#| first_search:
+#| # The nameserver IP in /etc/resolv.conf
+#| nameserver:
+#| # Which Service has that IP? (namespace/name)
+#| nameserver_service:
+#| # The `ndots` option value
+#| ndots:
+#| # The fully qualified DNS name of the Service `web`
+#| web_fqdn:
+#| # The port number in the SRV record _http._tcp.web.ex-7-4.svc.cluster.local
+#| srv_port:
+# The first search domain in a pod's /etc/resolv.conf in this namespace
+first_search: ex-7-4.svc.cluster.local
+# The nameserver IP in /etc/resolv.conf
+nameserver: $ kubectl -n kube-system get svc kube-dns -o jsonpath='{.spec.clusterIP}'
+# Which Service has that IP? (namespace/name)
+nameserver_service: kube-system/kube-dns
+# The `ndots` option value
+ndots: 5
+# The fully qualified DNS name of the Service `web`
+web_fqdn: web.ex-7-4.svc.cluster.local
+# The port number in the SRV record _http._tcp.web.ex-7-4.svc.cluster.local
+srv_port: 80
+#<<

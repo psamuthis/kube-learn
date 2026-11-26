@@ -1,0 +1,16 @@
+replicaCount: 1
+image:
+  repository: kubeapp
+  tag: ""            # empty: use the chart's appVersion
+  pullPolicy: IfNotPresent
+message: hello from helm
+service:
+  port: 80
+ingress:
+  enabled: false
+  className: nginx
+  host: ""
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi

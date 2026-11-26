@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hog
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: hog}
+  template:
+    metadata:
+      labels: {app: hog}
+    spec:
+      containers:
+        - name: hog
+          image: kubeapp:1.0
+          command: ["python", "-c"]
+          args:
+            - |
+              import time
+              data = bytearray(100 * 1024 * 1024)   # touch 100 MiB
+              for i in range(0, len(data), 4096):
+                  data[i] = 1
+              print("allocated 100 MiB, sleeping", flush=True)
+              time.sleep(10**9)
+          resources:
+            requests: {memory: 64Mi}
+            limits: {memory: 64Mi}

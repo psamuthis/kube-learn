@@ -1,0 +1,22 @@
+#>>
+#| # How many filesystem layers does kubeapp:1.0 have? (RootFS.Layers)
+#| layers:
+#| # Which user does it run as? (as written in the image config)
+#| user:
+#| # The value of the APP_VERSION environment variable baked into the image
+#| app_version:
+#| # The image's Entrypoint, joined by single spaces (e.g. `python /x.py`)
+#| entrypoint:
+#| # The digest (sha256:…) of the image's *config*, i.e. its image ID
+#| image_id:
+# How many filesystem layers does kubeapp:1.0 have? (RootFS.Layers)
+layers: $ docker image inspect -f '{{len .RootFS.Layers}}' kubeapp:1.0
+# Which user does it run as? (as written in the image config)
+user: $ docker image inspect -f '{{.Config.User}}' kubeapp:1.0
+# The value of the APP_VERSION environment variable baked into the image
+app_version: $ docker image inspect -f '{{range .Config.Env}}{{println .}}{{end}}' kubeapp:1.0 | sed -n 's/^APP_VERSION=//p'
+# The image's Entrypoint, joined by single spaces (e.g. `python /x.py`)
+entrypoint: $ docker image inspect -f '{{join .Config.Entrypoint " "}}' kubeapp:1.0
+# The digest (sha256:…) of the image's *config*, i.e. its image ID
+image_id: $ docker image inspect -f '{{.Id}}' kubeapp:1.0
+#<<

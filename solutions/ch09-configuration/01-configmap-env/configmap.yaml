@@ -1,0 +1,10 @@
+#>>
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shop-config
+data:
+  MESSAGE: configured by a ConfigMap
+  LOG_LEVEL: debug
+  FEATURE_CHECKOUT: "true"
+#<<

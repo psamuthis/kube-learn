@@ -1,0 +1,11 @@
+#>>
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: files
+data:
+  app.properties: |
+    cache.ttl=300
+    currency=EUR
+  motd.txt: Welcome to the shop
+#<<

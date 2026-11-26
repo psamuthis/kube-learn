@@ -1,0 +1,8 @@
+# The full etcd key under which the ConfigMap `plans` is stored
+configmap_key:
+# The etcd mod_revision of that key (etcdctl get KEY -w json)
+mod_revision:
+# Is the Secret's value `swordfish-42` readable as plain text in etcd? (yes/no)
+secret_plaintext:
+# So: what is the ConfigMap's metadata.resourceVersion? (compare with mod_revision!)
+resource_version:

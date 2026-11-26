@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+  #>>
+  #| # TODO: labels
+  labels:
+    app: kubeapp
+    tier: demo
+  #<<
+spec:
+  containers:
+    - name: kubeapp
+      image: kubeapp:1.0
+      #>>
+      #| # TODO: command, env, ports
+      command: ["python", "-u", "/app/app.py"]
+      env:
+        - name: PORT
+          value: "9090"
+        - name: MESSAGE
+          value: hello pods
+        - name: COLOR
+          value: purple
+      ports:
+        - name: http
+          containerPort: 9090
+      #<<

@@ -1,0 +1,30 @@
+#>>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kv-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: kv-operator}
+  template:
+    metadata:
+      labels: {app: kv-operator}
+    spec:
+      serviceAccountName: kv-operator
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+        - name: operator
+          image: kv-operator:dev
+          imagePullPolicy: Never
+          resources:
+            requests: {cpu: 10m, memory: 32Mi}
+            limits: {memory: 64Mi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+#<<

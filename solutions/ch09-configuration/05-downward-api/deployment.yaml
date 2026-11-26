@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: whoami}
+  template:
+    metadata:
+      labels: {app: whoami, team: platform}
+    spec:
+      containers:
+        - name: app
+          image: kubeapp:1.0
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe: {httpGet: {path: /ready, port: http}, periodSeconds: 2}
+          resources:
+            requests: {cpu: 10m, memory: 32Mi}
+            limits: {memory: 96Mi}
+          #>>
+          #| # TODO: env and volumeMounts
+          env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: POD_NAMESPACE
+              valueFrom: {fieldRef: {fieldPath: metadata.namespace}}
+            - name: POD_IP
+              valueFrom: {fieldRef: {fieldPath: status.podIP}}
+            - name: NODE_NAME
+              valueFrom: {fieldRef: {fieldPath: spec.nodeName}}
+            - name: MEMORY_LIMIT_MI
+              valueFrom:
+                resourceFieldRef:
+                  containerName: app
+                  resource: limits.memory
+                  divisor: 1Mi
+          volumeMounts:
+            - name: podinfo
+              mountPath: /config/podinfo
+          #<<
+      #>>
+      #| # TODO: volumes
+      volumes:
+        - name: podinfo
+          downwardAPI:
+            items:
+              - path: labels
+                fieldRef: {fieldPath: metadata.labels}
+      #<<

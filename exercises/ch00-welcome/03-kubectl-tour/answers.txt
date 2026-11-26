@@ -1,0 +1,10 @@
+# The URL of the API server (from `kubectl cluster-info`)
+api_server:
+# The container image (full reference) used by the CoreDNS pods
+coredns_image:
+# The name of the node that runs the kube-scheduler pod
+scheduler_node:
+# How many namespaces exist right now that start with `kube-`?
+kube_namespaces:
+# The pod CIDR (podCIDR) assigned to the node kube-learn-m02 (hint: describe the node, or -o yaml)
+m02_pod_cidr:

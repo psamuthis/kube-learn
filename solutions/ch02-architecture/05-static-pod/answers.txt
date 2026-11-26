@@ -1,0 +1,14 @@
+#>>
+#| # The name of the mirror pod as `kubectl get pods` shows it
+#| mirror_pod_name:
+#| # After `kubectl delete pod` on it: is it gone for good? (yes/no)
+#| gone_after_delete:
+#| # Which annotation key on the mirror pod marks it as a mirror pod?
+#| mirror_annotation:
+# The name of the mirror pod as `kubectl get pods` shows it
+mirror_pod_name: static-web-kube-learn-m02
+# After `kubectl delete pod` on it: is it gone for good? (yes/no)
+gone_after_delete: no
+# Which annotation key on the mirror pod marks it as a mirror pod?
+mirror_annotation: kubernetes.io/config.mirror
+#<<

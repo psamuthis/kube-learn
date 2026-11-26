@@ -1,0 +1,8 @@
+# How many fleet pods exist?
+fleet_pods:
+# Which object's events report the refused pods? (its kind)
+reporting_kind:
+# The reason of those events
+event_reason:
+# Which limit of the quota is hit first? (pods, requests.cpu or requests.memory)
+limit_hit:

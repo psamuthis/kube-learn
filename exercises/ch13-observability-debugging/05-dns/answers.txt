@@ -1,0 +1,4 @@
+# The nameserver the broken pod was using
+bad_nameserver:
+# The dnsPolicy that gives pods the cluster DNS (the default)
+good_policy:

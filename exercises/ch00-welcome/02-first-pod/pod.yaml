@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  # TODO: name and labels
+spec:
+  containers:
+    # TODO: one container named `web`, image nginx:1.29, port 80

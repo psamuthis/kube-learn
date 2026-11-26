@@ -1,0 +1,19 @@
+# Fill in each value after the colon.
+#>>
+#| # How many nodes does the cluster have?
+#| nodes:
+#| # The Kubernetes version the *server* runs (looks like v1.xx.y)
+#| server_version:
+#| # The name of the node with the control-plane role
+#| control_plane_node:
+#| # The name of your current kubectl context
+#| context:
+# How many nodes does the cluster have?
+nodes: $ kubectl get nodes --no-headers | wc -l
+# The Kubernetes version the *server* runs (looks like v1.xx.y)
+server_version: $ kubectl version -o json | python3 -c 'import json,sys; print(json.load(sys.stdin)["serverVersion"]["gitVersion"])'
+# The name of the node with the control-plane role
+control_plane_node: $ kubectl get nodes -l node-role.kubernetes.io/control-plane -o name | cut -d/ -f2
+# The name of your current kubectl context
+context: $ kubectl config current-context
+#<<

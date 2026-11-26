@@ -1,0 +1,2 @@
+# The value of SECRET_WORD in the container `main`
+secret_word:

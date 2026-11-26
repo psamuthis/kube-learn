@@ -1,0 +1,14 @@
+#>>
+#| # The STATUS the pods show
+#| status:
+#| # The key the Deployment asks for
+#| wanted_key:
+#| # The key the ConfigMap actually has
+#| actual_key:
+# The STATUS the pods show
+status: CreateContainerConfigError
+# The key the Deployment asks for
+wanted_key: LOG_LEVEL
+# The key the ConfigMap actually has
+actual_key: log_level
+#<<

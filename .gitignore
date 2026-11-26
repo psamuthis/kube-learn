@@ -1,0 +1,7 @@
+__pycache__/
+.course-progress
+# credentials you create during the exercises
+*.key
+*.crt
+*.csr
+*.kubeconfig

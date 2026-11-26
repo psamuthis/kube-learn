@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fleet
+spec:
+  replicas: 6
+  selector:
+    matchLabels: {app: fleet}
+  template:
+    metadata:
+      labels: {app: fleet}
+    spec:
+      containers:
+        - name: app
+          image: registry.k8s.io/pause:3.10
+          resources:
+            requests: {cpu: 50m, memory: 64Mi}

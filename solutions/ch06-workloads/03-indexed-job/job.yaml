@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: squares
+spec:
+  #>>
+  #| # TODO: completions, parallelism, completionMode
+  completions: 5
+  parallelism: 5
+  completionMode: Indexed
+  #<<
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: square
+          image: busybox:1.37
+          #>>
+          #| command: ["sh", "-c", "echo TODO"]
+          command: ["sh", "-c", "echo index=$JOB_COMPLETION_INDEX square=$((JOB_COMPLETION_INDEX * JOB_COMPLETION_INDEX))"]
+          #<<

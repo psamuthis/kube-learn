@@ -1,0 +1,10 @@
+#>>
+#| # The READY column of the web pods before your fix (e.g. 1/1)
+#| ready_before:
+#| # The HTTP status code the failing probe got
+#| probe_status:
+# The READY column of the web pods before your fix (e.g. 1/1)
+ready_before: 0/1
+# The HTTP status code the failing probe got
+probe_status: 404
+#<<

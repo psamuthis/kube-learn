@@ -1,0 +1,10 @@
+#>>
+#| # The name of the Deployment whose pod uses the most CPU
+#| hog:
+#| # Roughly how many millicores does it use? (it's capped by its limit: read it in `kubectl top`)
+#| millicores:
+# The name of the Deployment whose pod uses the most CPU
+hog: $ kubectl -n $NS top pods --no-headers --sort-by=cpu | head -1 | awk '{print $1}' | sed 's/-[a-z0-9]*-[a-z0-9]*$//'
+# Roughly how many millicores does it use? (it's capped by its limit: read it in `kubectl top`)
+millicores: 150
+#<<

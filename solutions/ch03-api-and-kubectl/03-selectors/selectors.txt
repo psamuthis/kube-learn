@@ -1,0 +1,22 @@
+#>>
+#| # q1: the shop pods running in prod                      (expected: a b)
+#| q1:
+#| # q2: pods in prod or staging that are not databases     (expected: a c d)
+#| q2:
+#| # q3: pods without any `release` label                   (expected: c d f)
+#| q3:
+#| # q4: pods that have a `team` label but aren't shop      (expected: d)
+#| q4:
+#| # q5: shop web pods, except those in dev                 (expected: a c)
+#| q5:
+# q1: the shop pods running in prod                      (expected: a b)
+q1: app=shop,env=prod
+# q2: pods in prod or staging that are not databases     (expected: a c d)
+q2: env in (prod,staging),tier!=db
+# q3: pods without any `release` label                   (expected: c d f)
+q3: !release
+# q4: pods that have a `team` label but aren't shop      (expected: d)
+q4: team,app!=shop
+# q5: shop web pods, except those in dev                 (expected: a c)
+q5: app=shop,tier=web,env notin (dev)
+#<<

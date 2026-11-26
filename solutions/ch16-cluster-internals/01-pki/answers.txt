@@ -1,0 +1,26 @@
+#>>
+#| # The CN of the issuer of the API server's certificate
+#| apiserver_issuer:
+#| # The IP address SAN of the API server cert that is the ClusterIP of the `kubernetes` Service in `default`
+#| service_ip_san:
+#| # The year the API server's certificate expires
+#| apiserver_expiry_year:
+#| # Your username, as the API server sees it
+#| my_user:
+#| # The group in your certificate that makes you cluster-admin (bypassing RBAC)
+#| my_admin_group:
+#| # The username of the kubelet on kube-learn-m02 (the CN of its client certificate)
+#| kubelet_m02_user:
+# The CN of the issuer of the API server's certificate
+apiserver_issuer: minikubeCA
+# The IP address SAN of the API server cert that is the ClusterIP of the `kubernetes` Service in `default`
+service_ip_san: $ kubectl get svc kubernetes -n default -o jsonpath='{.spec.clusterIP}'
+# The year the API server's certificate expires
+apiserver_expiry_year: $ minikube -p kube-learn ssh -- sudo openssl x509 -in /var/lib/minikube/certs/apiserver.crt -noout -enddate | tr -d '\r' | awk '{print $4}'
+# Your username, as the API server sees it
+my_user: $ kubectl auth whoami -o jsonpath='{.status.userInfo.username}'
+# The group in your certificate that makes you cluster-admin (bypassing RBAC)
+my_admin_group: system:masters
+# The username of the kubelet on kube-learn-m02 (the CN of its client certificate)
+kubelet_m02_user: system:node:kube-learn-m02
+#<<

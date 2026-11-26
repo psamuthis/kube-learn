@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  # TODO: change-cause annotation
+spec:
+  replicas: 3
+  # TODO: strategy and minReadySeconds
+  selector:
+    matchLabels: {app: web}
+  template:
+    metadata:
+      labels: {app: web}
+    spec:
+      containers:
+        - name: app
+          image: kubeapp:1.0
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe:
+            httpGet: {path: /ready, port: http}
+            periodSeconds: 1
+          resources:
+            requests: {cpu: 20m, memory: 32Mi}

@@ -1,0 +1,6 @@
+# The metadata field set by the deletion request (the object's "scheduled for deletion" marker)
+deletion_field:
+# The finalizer that blocks the deletion
+finalizer:
+# Can you still change `data` on the object? (yes/no)
+data_editable:

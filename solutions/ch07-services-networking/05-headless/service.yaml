@@ -1,0 +1,13 @@
+#>>
+apiVersion: v1
+kind: Service
+metadata:
+  name: peers
+spec:
+  clusterIP: None
+  selector:
+    app: peer
+  ports:
+    - name: http
+      port: 8080
+#<<

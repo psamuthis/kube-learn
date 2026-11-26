@@ -1,0 +1,9 @@
+# Fill in each value after the colon.
+# How many nodes does the cluster have?
+nodes:
+# The Kubernetes version the *server* runs (looks like v1.xx.y)
+server_version:
+# The name of the node with the control-plane role
+control_plane_node:
+# The name of your current kubectl context
+context:

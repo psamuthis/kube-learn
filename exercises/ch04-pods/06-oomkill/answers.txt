@@ -1,0 +1,6 @@
+# The reason the container was terminated (from Last State)
+reason:
+# Its exit code
+exit_code:
+# The signal number that exit code means (exit code − 128)
+signal:

@@ -1,0 +1,22 @@
+#>>
+#| # PID of the python process *inside* the container
+#| pid_inside:
+#| # The container's hostname
+#| hostname:
+#| # The exact content of /sys/fs/cgroup/memory.max inside the container
+#| memory_max:
+#| # The exact content of /sys/fs/cgroup/cpu.max inside the container
+#| cpu_max:
+#| # PID of the same python process as seen *on the node*
+#| pid_on_node:
+# PID of the python process *inside* the container
+pid_inside: $ kubectl -n $NS exec inspect -- sh -c 'pgrep -f app.py | head -1'
+# The container's hostname
+hostname: $ kubectl -n $NS exec inspect -- hostname
+# The exact content of /sys/fs/cgroup/memory.max inside the container
+memory_max: $ kubectl -n $NS exec inspect -- cat /sys/fs/cgroup/memory.max
+# The exact content of /sys/fs/cgroup/cpu.max inside the container
+cpu_max: $ kubectl -n $NS exec inspect -- cat /sys/fs/cgroup/cpu.max
+# PID of the same python process as seen *on the node*
+pid_on_node: $ N=$(kubectl -n $NS get pod inspect -o jsonpath='{.spec.nodeName}'); C=$(kubectl -n $NS get pod inspect -o jsonpath='{.status.containerStatuses[0].containerID}' | sed 's|.*://||'); minikube -p kube-learn ssh -n $N -- sudo crictl inspect --output go-template --template '{{.info.pid}}' $C | tr -d '\r'
+#<<

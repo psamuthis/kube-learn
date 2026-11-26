@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels: {app: web}
+  template:
+    metadata:
+      labels: {app: web}
+    spec:
+      # TODO: affinity
+      containers:
+        - name: web
+          image: registry.k8s.io/pause:3.10
+          resources: {requests: {cpu: 5m, memory: 8Mi}}

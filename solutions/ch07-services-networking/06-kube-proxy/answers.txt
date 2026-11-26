@@ -1,0 +1,22 @@
+#>>
+#| # The proxy mode kube-proxy uses (iptables, ipvs or nftables)
+#| mode:
+#| # The name of the KUBE-SVC-… chain for ex-7-6/web:http
+#| svc_chain:
+#| # How many KUBE-SEP-… (endpoint) chains does that chain jump to?
+#| endpoints:
+#| # The --probability value on the first jump (as printed, e.g. 0.33333333349)
+#| first_probability:
+#| # The DNAT target (IP:port) of one of the SEP chains: which pod IP:port is it?
+#| one_dnat_target:
+# The proxy mode kube-proxy uses (iptables, ipvs or nftables)
+mode: iptables
+# The name of the KUBE-SVC-… chain for ex-7-6/web:http
+svc_chain: $ minikube -p kube-learn ssh -- sudo iptables-save -t nat | grep -- '-A KUBE-SERVICES' | grep 'ex-7-6/web:http cluster IP' | grep -o 'KUBE-SVC-[A-Z0-9]*' | head -1
+# How many KUBE-SEP-… (endpoint) chains does that chain jump to?
+endpoints: 2
+# The --probability value on the first jump (as printed, e.g. 0.33333333349)
+first_probability: $ minikube -p kube-learn ssh -- sudo iptables-save -t nat | grep 'ex-7-6/web:http' | grep -o 'probability [0-9.]*' | head -1 | cut -d' ' -f2
+# The DNAT target (IP:port) of one of the SEP chains: which pod IP:port is it?
+one_dnat_target: $ echo "$(kubectl -n $NS get pods -l app=web -o jsonpath='{.items[0].status.podIP}'):8080"
+#<<

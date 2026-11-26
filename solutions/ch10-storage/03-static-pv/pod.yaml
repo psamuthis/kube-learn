@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: reader
+spec:
+  containers:
+    - name: app
+      image: kubeapp:1.0
+      env: [{name: CONFIG_DIR, value: /archive}]
+      readinessProbe: {httpGet: {path: /ready, port: 8080}, periodSeconds: 2}
+      volumeMounts:
+        - name: archive
+          mountPath: /archive
+          readOnly: true
+  volumes:
+    - name: archive
+      persistentVolumeClaim:
+        claimName: archive

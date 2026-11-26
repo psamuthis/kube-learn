@@ -1,0 +1,6 @@
+#>>
+#| # The value of SECRET_WORD in the container `main`
+#| secret_word:
+# The value of SECRET_WORD in the container `main`
+secret_word: $ kubectl -n $NS exec vault -c dbg -- sh -c "tr '\0' '\n' < /proc/1/environ | sed -n 's/^SECRET_WORD=//p'"
+#<<

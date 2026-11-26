@@ -1,0 +1,30 @@
+#>>
+#| # The name of the default StorageClass
+#| default_class:
+#| # Its provisioner
+#| provisioner:
+#| # Its volumeBindingMode
+#| binding_mode:
+#| # The phase of the claim `probe` before any pod uses it
+#| phase_before_pod:
+#| # (after applying manual/pod.yaml) The name of the PV bound to `probe`
+#| pv_name:
+#| # The node that PV is pinned to (its nodeAffinity)
+#| pv_node:
+#| # What happens to the PV when you delete the claim? (the reclaim policy)
+#| reclaim_policy:
+# The name of the default StorageClass
+default_class: local-path
+# Its provisioner
+provisioner: rancher.io/local-path
+# Its volumeBindingMode
+binding_mode: WaitForFirstConsumer
+# The phase of the claim `probe` before any pod uses it
+phase_before_pod: Pending
+# (after applying manual/pod.yaml) The name of the PV bound to `probe`
+pv_name: $ kubectl -n $NS get pvc probe -o jsonpath='{.spec.volumeName}'
+# The node that PV is pinned to (its nodeAffinity)
+pv_node: $ kubectl get pv $(kubectl -n $NS get pvc probe -o jsonpath='{.spec.volumeName}') -o jsonpath='{.spec.nodeAffinity.required.nodeSelectorTerms[0].matchExpressions[0].values[0]}'
+# What happens to the PV when you delete the claim? (the reclaim policy)
+reclaim_policy: Delete
+#<<

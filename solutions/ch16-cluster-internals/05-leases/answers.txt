@@ -1,0 +1,22 @@
+#>>
+#| # The namespace holding the nodes' heartbeat Leases
+#| node_lease_namespace:
+#| # A node Lease's leaseDurationSeconds
+#| node_lease_duration:
+#| # Roughly how many seconds between two renewals of a node Lease?
+#| renew_interval:
+#| # The holderIdentity of the kube-controller-manager Lease
+#| controller_manager_holder:
+#| # The kind of object that owns each node Lease (ownerReferences)
+#| node_lease_owner_kind:
+# The namespace holding the nodes' heartbeat Leases
+node_lease_namespace: kube-node-lease
+# A node Lease's leaseDurationSeconds
+node_lease_duration: 40
+# Roughly how many seconds between two renewals of a node Lease?
+renew_interval: 10
+# The holderIdentity of the kube-controller-manager Lease
+controller_manager_holder: $ kubectl -n kube-system get lease kube-controller-manager -o jsonpath='{.spec.holderIdentity}'
+# The kind of object that owns each node Lease (ownerReferences)
+node_lease_owner_kind: Node
+#<<

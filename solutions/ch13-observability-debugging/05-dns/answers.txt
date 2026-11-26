@@ -1,0 +1,10 @@
+#>>
+#| # The nameserver the broken pod was using
+#| bad_nameserver:
+#| # The dnsPolicy that gives pods the cluster DNS (the default)
+#| good_policy:
+# The nameserver the broken pod was using
+bad_nameserver: 10.96.0.99
+# The dnsPolicy that gives pods the cluster DNS (the default)
+good_policy: ClusterFirst
+#<<

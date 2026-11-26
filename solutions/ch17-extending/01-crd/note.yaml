@@ -1,0 +1,9 @@
+#>>
+apiVersion: kube-learn.dev/v1
+kind: Note
+metadata:
+  name: first
+spec:
+  text: Kubernetes is a database of desired state plus control loops.
+  tags: [k8s, notes]
+#<<

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: snapshot-status
+spec:
+  restartPolicy: Never
+  # TODO: nodeName, containers, volumes

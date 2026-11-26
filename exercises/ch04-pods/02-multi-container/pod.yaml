@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+  labels:
+    app: web
+spec:
+  containers:
+    - name: nginx
+      image: nginx:1.29-alpine
+      ports:
+        - containerPort: 80
+      # TODO: mount the shared volume
+    - name: writer
+      image: busybox:1.37
+      command: ["sh", "-c", "while true; do echo \"<p>written by $(hostname) at $(date)</p>\" > /html/index.html; sleep 2; done"]
+      # TODO: mount the shared volume
+  # TODO: declare the volume

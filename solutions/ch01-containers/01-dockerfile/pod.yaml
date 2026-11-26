@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello
+  labels:
+    app: hello
+spec:
+  containers:
+    - name: hello
+      image: hello-ch01:1.0
+      # The image only exists on the nodes (loaded by the checker), never in a registry.
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 8000

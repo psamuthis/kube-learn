@@ -1,0 +1,8 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kubeapp.fullname" . }}
+  labels:
+    {{- include "kubeapp.labels" . | nindent 4 }}
+spec:
+  # TODO: replicas, selector, template

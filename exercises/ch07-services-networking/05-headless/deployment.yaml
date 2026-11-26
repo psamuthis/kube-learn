@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peer
+spec:
+  replicas: 3
+  selector:
+    matchLabels: {app: peer}
+  template:
+    metadata:
+      labels: {app: peer}
+    spec:
+      containers:
+        - name: app
+          image: kubeapp:1.0
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe: {httpGet: {path: /ready, port: http}, periodSeconds: 2}
+          resources: {requests: {cpu: 10m, memory: 32Mi}}

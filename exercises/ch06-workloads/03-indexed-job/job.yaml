@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: squares
+spec:
+  # TODO: completions, parallelism, completionMode
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: square
+          image: busybox:1.37
+          command: ["sh", "-c", "echo TODO"]

@@ -1,0 +1,14 @@
+# The name of the default StorageClass
+default_class:
+# Its provisioner
+provisioner:
+# Its volumeBindingMode
+binding_mode:
+# The phase of the claim `probe` before any pod uses it
+phase_before_pod:
+# (after applying manual/pod.yaml) The name of the PV bound to `probe`
+pv_name:
+# The node that PV is pinned to (its nodeAffinity)
+pv_node:
+# What happens to the PV when you delete the claim? (the reclaim policy)
+reclaim_policy:

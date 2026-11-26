@@ -1,0 +1,10 @@
+#>>
+#| # The exit code of the crashing container (describe → Last State)
+#| exit_code:
+#| # The kubectl flag that shows the logs of the previous (crashed) container instance
+#| logs_flag:
+# The exit code of the crashing container (describe → Last State)
+exit_code: 2
+# The kubectl flag that shows the logs of the previous (crashed) container instance
+logs_flag: --previous
+#<<

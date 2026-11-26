@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web
+spec:
+  containers:
+    - name: nginx
+      #>>
+      #| image: nginx:1.29-alpne
+      image: nginx:1.29-alpine
+      #<<
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+spec:
+  containers:
+    - name: kubeapp
+      image: kubeapp:1.0
+      #>>
+      #| imagePullPolicy: Always
+      imagePullPolicy: IfNotPresent
+      #<<

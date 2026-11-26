@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpu-job
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: gpu-job}
+  template:
+    metadata:
+      labels: {app: gpu-job}
+    spec:
+      # TODO: tolerations and nodeSelector
+      containers:
+        - name: app
+          image: registry.k8s.io/pause:3.10
+          resources: {requests: {cpu: 5m, memory: 8Mi}}

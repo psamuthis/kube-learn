@@ -1,0 +1,22 @@
+#>>
+#| # The URL of the API server (from `kubectl cluster-info`)
+#| api_server:
+#| # The container image (full reference) used by the CoreDNS pods
+#| coredns_image:
+#| # The name of the node that runs the kube-scheduler pod
+#| scheduler_node:
+#| # How many namespaces exist right now that start with `kube-`?
+#| kube_namespaces:
+#| # The pod CIDR (podCIDR) assigned to the node kube-learn-m02 (hint: describe the node, or -o yaml)
+#| m02_pod_cidr:
+# The URL of the API server (from `kubectl cluster-info`)
+api_server: $ kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
+# The container image (full reference) used by the CoreDNS pods
+coredns_image: $ kubectl -n kube-system get pods -l k8s-app=kube-dns -o jsonpath='{.items[0].spec.containers[0].image}'
+# The name of the node that runs the kube-scheduler pod
+scheduler_node: $ kubectl -n kube-system get pods -l component=kube-scheduler -o jsonpath='{.items[0].spec.nodeName}'
+# How many namespaces exist right now that start with `kube-`?
+kube_namespaces: $ kubectl get ns --no-headers -o custom-columns=N:.metadata.name | grep -c '^kube-'
+# The pod CIDR (podCIDR) assigned to the node kube-learn-m02 (hint: describe the node, or -o yaml)
+m02_pod_cidr: $ kubectl get node kube-learn-m02 -o jsonpath='{.spec.podCIDR}'
+#<<

@@ -1,0 +1,16 @@
+# The API group of Deployment
+deployment_group:
+# The short name of persistentvolumeclaims
+pvc_short:
+# Is Node a namespaced resource? (true/false)
+node_namespaced:
+# The kind behind the short name `netpol`
+netpol_kind:
+# The apiVersion (group/version) you should use for HorizontalPodAutoscaler
+hpa_api_version:
+# The type of cronjob.spec.schedule, as `kubectl explain` prints it (without the <>)
+cron_schedule_type:
+# The default value of a Pod's spec.restartPolicy
+default_restart_policy:
+# The resource (plural, lower-case) name for the kind PodDisruptionBudget
+pdb_resource:

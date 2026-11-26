@@ -1,0 +1,7 @@
+apiVersion: kube-learn.dev/v1
+kind: KeyValueStore
+metadata:
+  name: cache
+spec:
+  replicas: 2
+  version: "7.4"

@@ -1,0 +1,10 @@
+# The proxy mode kube-proxy uses (iptables, ipvs or nftables)
+mode:
+# The name of the KUBE-SVC-… chain for ex-7-6/web:http
+svc_chain:
+# How many KUBE-SEP-… (endpoint) chains does that chain jump to?
+endpoints:
+# The --probability value on the first jump (as printed, e.g. 0.33333333349)
+first_probability:
+# The DNAT target (IP:port) of one of the SEP chains: which pod IP:port is it?
+one_dnat_target:

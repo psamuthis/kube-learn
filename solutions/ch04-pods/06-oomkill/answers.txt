@@ -1,0 +1,14 @@
+#>>
+#| # The reason the container was terminated (from Last State)
+#| reason:
+#| # Its exit code
+#| exit_code:
+#| # The signal number that exit code means (exit code − 128)
+#| signal:
+# The reason the container was terminated (from Last State)
+reason: OOMKilled
+# Its exit code
+exit_code: 137
+# The signal number that exit code means (exit code − 128)
+signal: 9
+#<<

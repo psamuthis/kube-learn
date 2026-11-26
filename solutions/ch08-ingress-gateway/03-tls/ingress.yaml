@@ -1,0 +1,19 @@
+#>>
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: secure
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts: [secure.ex83.kube-learn.test]
+      secretName: secure-tls
+  rules:
+    - host: secure.ex83.kube-learn.test
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: {name: secure, port: {name: http}}
+#<<

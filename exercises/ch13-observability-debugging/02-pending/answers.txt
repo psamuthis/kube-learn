@@ -1,0 +1,4 @@
+# The reason of the event explaining why the pods aren't scheduled
+event_reason:
+# The name of the node label that no node has
+missing_label:

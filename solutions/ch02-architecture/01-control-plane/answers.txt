@@ -1,0 +1,26 @@
+#>>
+#| # The directory the kubelet watches for static pod manifests (staticPodPath)
+#| static_pod_path:
+#| # The port the API server listens on (its --secure-port flag)
+#| apiserver_port:
+#| # The directory etcd stores its data in (its --data-dir flag)
+#| etcd_data_dir:
+#| # The container runtime and version of node kube-learn, as the node reports it (e.g. containerd://1.2.3)
+#| runtime:
+#| # The holder identity of the kube-scheduler leader-election Lease
+#| scheduler_leader:
+#| # How many controllers does a static pod have? i.e. what is the `kind` of the ownerReference of the kube-apiserver pod
+#| apiserver_owner_kind:
+# The directory the kubelet watches for static pod manifests (staticPodPath)
+static_pod_path: $ minikube -p kube-learn ssh -- sudo grep staticPodPath /var/lib/kubelet/config.yaml | awk '{print $2}' | tr -d '\r'
+# The port the API server listens on (its --secure-port flag)
+apiserver_port: $ kubectl -n kube-system get pod -l component=kube-apiserver -o jsonpath='{.items[0].spec.containers[0].command}' | tr ',' '\n' | sed -n 's/.*--secure-port=\([0-9]*\).*/\1/p'
+# The directory etcd stores its data in (its --data-dir flag)
+etcd_data_dir: $ kubectl -n kube-system get pod -l component=etcd -o jsonpath='{.items[0].spec.containers[0].command}' | tr ',' '\n' | sed -n 's/.*--data-dir=\([^"]*\).*/\1/p'
+# The container runtime and version of node kube-learn, as the node reports it (e.g. containerd://1.2.3)
+runtime: $ kubectl get node kube-learn -o jsonpath='{.status.nodeInfo.containerRuntimeVersion}'
+# The holder identity of the kube-scheduler leader-election Lease
+scheduler_leader: $ kubectl -n kube-system get lease kube-scheduler -o jsonpath='{.spec.holderIdentity}'
+# How many controllers does a static pod have? i.e. what is the `kind` of the ownerReference of the kube-apiserver pod
+apiserver_owner_kind: $ kubectl -n kube-system get pod -l component=kube-apiserver -o jsonpath='{.items[0].metadata.ownerReferences[0].kind}'
+#<<

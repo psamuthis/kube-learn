@@ -1,0 +1,6 @@
+# The snapshot's revision (from etcdutl snapshot status)
+revision:
+# Its total number of keys
+total_keys:
+# Its hash
+hash:

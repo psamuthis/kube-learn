@@ -1,0 +1,10 @@
+# PID of the python process *inside* the container
+pid_inside:
+# The container's hostname
+hostname:
+# The exact content of /sys/fs/cgroup/memory.max inside the container
+memory_max:
+# The exact content of /sys/fs/cgroup/cpu.max inside the container
+cpu_max:
+# PID of the same python process as seen *on the node*
+pid_on_node:

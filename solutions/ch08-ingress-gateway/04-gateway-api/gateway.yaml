@@ -1,0 +1,13 @@
+#>>
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: public
+spec:
+  gatewayClassName: example
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      hostname: shop.ex84.kube-learn.test
+#<<

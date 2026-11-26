@@ -1,0 +1,12 @@
+# The first search domain in a pod's /etc/resolv.conf in this namespace
+first_search:
+# The nameserver IP in /etc/resolv.conf
+nameserver:
+# Which Service has that IP? (namespace/name)
+nameserver_service:
+# The `ndots` option value
+ndots:
+# The fully qualified DNS name of the Service `web`
+web_fqdn:
+# The port number in the SRV record _http._tcp.web.ex-7-4.svc.cluster.local
+srv_port:

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: snapshot-status
+spec:
+  restartPolicy: Never
+  #>>
+  #| # TODO: nodeName, containers, volumes
+  nodeName: kube-learn
+  containers:
+    - name: etcdutl
+      image: gcr.io/etcd-development/etcd:v3.6.4
+      command: ["/usr/local/bin/etcdutl", "snapshot", "status", "/data/snapshot-ex163.db", "-w", "json"]
+      volumeMounts:
+        - name: etcd-data
+          mountPath: /data
+          readOnly: true
+  volumes:
+    - name: etcd-data
+      hostPath:
+        path: /var/lib/minikube/etcd
+  #<<

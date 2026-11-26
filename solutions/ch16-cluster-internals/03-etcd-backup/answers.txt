@@ -1,0 +1,14 @@
+#>>
+#| # The snapshot's revision (from etcdutl snapshot status)
+#| revision:
+#| # Its total number of keys
+#| total_keys:
+#| # Its hash
+#| hash:
+# The snapshot's revision (from etcdutl snapshot status)
+revision: $ kubectl -n $NS logs snapshot-status | python3 -c 'import json,sys; print(json.load(sys.stdin)["revision"])'
+# Its total number of keys
+total_keys: $ kubectl -n $NS logs snapshot-status | python3 -c 'import json,sys; print(json.load(sys.stdin)["totalKey"])'
+# Its hash
+hash: $ kubectl -n $NS logs snapshot-status | python3 -c 'import json,sys; print(json.load(sys.stdin)["hash"])'
+#<<

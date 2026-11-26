@@ -1,0 +1,5 @@
+#!/usr/bin/env python3
+# Entry point: ./course <command>. See runner/course.py.
+import runpy, sys, pathlib
+sys.argv[0] = "course"
+runpy.run_path(str(pathlib.Path(__file__).resolve().parent / "runner" / "course.py"), run_name="__main__")

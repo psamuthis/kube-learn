@@ -1,0 +1,15 @@
+#>>
+apiVersion: discovery.k8s.io/v1
+kind: EndpointSlice
+metadata:
+  name: legacy-1
+  labels:
+    kubernetes.io/service-name: legacy
+addressType: IPv4
+ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+endpoints:
+  - addresses: ["LEGACY_IP"]
+#<<

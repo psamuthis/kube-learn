@@ -1,0 +1,6 @@
+# The value stored in the Secret's `data.password` field (as `kubectl get -o yaml` shows it)
+password_in_data:
+# Which command decodes it? (the program name)
+decoder:
+# On a node, Secret volumes live on what kind of filesystem? (look at `mount` inside the pod)
+fs_type:

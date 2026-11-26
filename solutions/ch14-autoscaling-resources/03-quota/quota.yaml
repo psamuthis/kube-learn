@@ -1,0 +1,11 @@
+#>>
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: budget
+spec:
+  hard:
+    pods: "4"
+    requests.cpu: 400m
+    requests.memory: 512Mi
+#<<

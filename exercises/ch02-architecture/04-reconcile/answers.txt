@@ -1,0 +1,10 @@
+# The kind of object that owns the pods
+pod_owner_kind:
+# The kind of object that owns *that* object
+owner_owner_kind:
+# The `source`/reportingController of the events that created replacement pods (see `kubectl get events -o wide`)
+recreated_by:
+# The event reason when a replacement pod was created
+create_reason:
+# After `kubectl scale --replicas=5` and re-applying the file, how many replicas are there?
+replicas_after_apply:

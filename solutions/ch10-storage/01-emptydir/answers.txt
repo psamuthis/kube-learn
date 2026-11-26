@@ -1,0 +1,14 @@
+#>>
+#| # After /crash (the container restarts in the same pod), does the counter keep its value? (yes/no)
+#| survives_container_restart:
+#| # After deleting the pod, does it? (yes/no)
+#| survives_pod_deletion:
+#| # Where does an emptyDir live on the node? (the directory under /var/lib/kubelet/pods/<pod uid>/volumes/…, just the plugin dir name)
+#| plugin_dir:
+# After /crash (the container restarts in the same pod), does the counter keep its value? (yes/no)
+survives_container_restart: yes
+# After deleting the pod, does it? (yes/no)
+survives_pod_deletion: no
+# Where does an emptyDir live on the node? (the directory under /var/lib/kubelet/pods/<pod uid>/volumes/…, just the plugin dir name)
+plugin_dir: kubernetes.io~empty-dir
+#<<

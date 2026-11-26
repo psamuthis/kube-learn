@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: shop}
+  template:
+    metadata:
+      labels: {app: shop}
+    spec:
+      containers:
+        - name: app
+          image: kubeapp:1.0
+          env: [{name: MESSAGE, value: "shop v1"}]
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe: {httpGet: {path: /ready, port: http}, periodSeconds: 2}
+          resources: {requests: {cpu: 10m, memory: 32Mi}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop
+spec:
+  selector: {app: shop}
+  ports: [{name: http, port: 80, targetPort: http}]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: shop-v2}
+  template:
+    metadata:
+      labels: {app: shop-v2}
+    spec:
+      containers:
+        - name: app
+          image: kubeapp:2.0
+          env: [{name: MESSAGE, value: "shop v2"}]
+          ports: [{name: http, containerPort: 8080}]
+          readinessProbe: {httpGet: {path: /ready, port: http}, periodSeconds: 2}
+          resources: {requests: {cpu: 10m, memory: 32Mi}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop-v2
+spec:
+  selector: {app: shop-v2}
+  ports: [{name: http, port: 80, targetPort: http}]

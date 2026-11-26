@@ -1,0 +1,8 @@
+# The taint key that `kubectl cordon` adds to the node
+cordon_taint:
+# Which kind of pods makes `kubectl drain` refuse to proceed without --ignore-daemonsets?
+blocking_kind:
+# The PDB's status.disruptionsAllowed when all 3 web pods are Ready
+disruptions_allowed:
+# The HTTP status code the Eviction API returns when a PDB refuses an eviction
+refused_status:

@@ -1,0 +1,31 @@
+#>>
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicy
+metadata:
+  name: team-and-size-ex172
+spec:
+  failurePolicy: Fail
+  matchConstraints:
+    resourceRules:
+      - apiGroups: [apps]
+        apiVersions: [v1]
+        operations: [CREATE, UPDATE]
+        resources: [deployments]
+  validations:
+    - expression: "has(object.metadata.labels) && 'team' in object.metadata.labels"
+      message: every Deployment needs a team label
+    - expression: "object.spec.replicas <= 5"
+      messageExpression: "'too many replicas: ' + string(object.spec.replicas) + ' (max 5)'"
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: team-and-size-ex172
+spec:
+  policyName: team-and-size-ex172
+  validationActions: [Deny]
+  matchResources:
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: ex-17-2
+#<<

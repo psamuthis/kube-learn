@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: probes}
+  template:
+    metadata:
+      labels: {app: probes}
+    spec:
+      containers:
+        - name: kubeapp
+          image: kubeapp:1.0
+          env:
+            - name: READY_DELAY
+              value: "20"
+          ports:
+            - name: http
+              containerPort: 8080
+          #>>
+          #| readinessProbe:
+          #|   httpGet:
+          #|     path: /ready
+          #|     port: 80
+          #|   periodSeconds: 2
+          #| livenessProbe:
+          #|   httpGet:
+          #|     path: /ready
+          #|     port: http
+          #|   periodSeconds: 2
+          #|   failureThreshold: 2
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            periodSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 3
+            failureThreshold: 3
+          #<<
